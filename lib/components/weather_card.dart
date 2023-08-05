@@ -9,16 +9,17 @@ import '../models/weather_record.dart';
 
 資訊呈現部分我用 chatGPT 生成的
 應該有很多部分可以拆，有機會再精進
+(包括資料處理應該拆去 service，而不是在 component 中完成)
 
 */
 
 class WeatherCard extends StatelessWidget {
-  const WeatherCard({super.key});
+  WeatherCard({Key? key}) : super(key: key);
+
+  final GlobalController globalController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    final GlobalController globalController = Get.find();
-
     return FutureBuilder(
         future: WeatherRecordService.getWeatherRecords(
             globalController.selectedLocation.value),
@@ -39,6 +40,8 @@ class WeatherCard extends StatelessWidget {
             } else {
               record = asyncSnapshot.requireData;
               print(record.locationName); // 確認一下
+
+              // 底下的資料操作應該在 Service 完成，但這次先這樣解決
 
               // 定義更友好的天氣元素名稱
               Map<String, String> elementNames = {

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           if (globalController.isLoading.isTrue) {
             return LoadingScreen();
           } else {
-            return const HomeScreen();
+            return HomeScreen();
           }
         }));
   }

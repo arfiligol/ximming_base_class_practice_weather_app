@@ -1,22 +1,34 @@
 import './weather/element.dart';
 
+/// Represents a weather record, including the location name and a list of weather elements.
 class WeatherRecord {
+  /// The name of the location for which the weather record is applicable.
   String locationName;
+
+  /// A list of weather elements associated with the location.
   List<WeatherElement> weatherElement;
 
+  /// Constructor for creating an instance of the weather record.
+  ///
+  /// [locationName] and [weatherElement] are required.
   WeatherRecord({
     required this.locationName,
     required this.weatherElement,
   });
 
+  /// Factory constructor to create an instance of weather record from a JSON object.
+  ///
+  /// This method iteratively processes the JSON object, converting each "weatherElement" into a Dart class and combining them into a list.
+  ///
+  /// [json] is a Map containing the weather record.
   factory WeatherRecord.fromJson(Map<String, dynamic> json) {
-    print(json);
+    print(json); // Debugging line to print the JSON object
     return WeatherRecord(
-        locationName: json['locationName'],
-        weatherElement: json['weatherElement'] // a list of "weatherElement"
+        locationName: json['locationName'], // Location name
+        weatherElement: json['weatherElement'] // A list of "weatherElement"
             .map<WeatherElement>(
-                (element) => // convert to dart class iteratively
+                (element) => // Convert to Dart class iteratively
                     WeatherElement.fromJson(element))
-            .toList()); // combine all the weatherElement to a list
+            .toList()); // Combine all the weather elements into a list
   }
 }

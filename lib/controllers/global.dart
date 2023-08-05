@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 import 'package:ximming_base_practice_whether_app/services/locations_service.dart';
 
-/*
-實務上，不會將所以東西都透過一個 Controller 處理（尤其是系統很多 part 的時候）
-
-但這個 App，為求方便，先將所有 state 透過一個 "GlobalController" 來控制
-
-*/
-
-// 在 GetX 中，依賴項管理容器是透過「Instance Type」來查找 Controller
-// 我們會創建一個 Controller Instance -> 該 Controller 有 Type -> 使用 Get.find<Controller Type>() 來查找依賴項容器中該類型的 Controller
+/// A global controller for managing state across the application.
+///
+/// In practice, it's not common to manage all state through a single controller,
+/// especially for larger systems. However, for simplicity, this app uses a single
+/// "GlobalController" to manage all state.
+///
+/// In GetX, dependency injection is done by type. We create an instance of a controller,
+/// which has a type, and then use Get.find<ControllerType>() to find the controller
+/// in the dependency injection container.
 class GlobalController extends GetxController {
-  // 在此宣告一些 state
+  // Declare some state variables
   RxBool isLoading = true.obs;
   RxString selectedLocation = "".obs;
   RxList<String> locations = <String>[].obs;
@@ -22,14 +22,21 @@ class GlobalController extends GetxController {
     initializeLocation();
   }
 
+  /// Performs initialization tasks such as making network requests and reading local data.
+  ///
+  /// Initially, it fetches the locations from the [LocationService] and assigns them to the
+  /// [locations] state variable.
+  ///
+  /// After a delay of 2 seconds, it sets the [isLoading] state variable to false, indicating
+  /// that the data has been loaded and the application can navigate to the [HomeScreen].
   void initializeLocation() async {
-    // 做初始化的動作，例如發起網路請求，讀取本地數據等
-    // 例如：
+    // Fetch the locations from the LocationService
     locations.value = await LocationService.getLocations();
 
+    // Wait for 2 seconds
     await Future.delayed(const Duration(seconds: 2));
 
-    // 當數據加載完成後，更新 isLoading 的值
+    // Once the data is loaded, update the value of isLoading
     isLoading.value = false;
   }
 }
