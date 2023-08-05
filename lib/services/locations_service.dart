@@ -5,38 +5,44 @@ import '../models/weather_record.dart';
 import './daos/weather_record_dao.dart';
 import './daos/locations_dao.dart';
 
-/*
-先查看本地是否有暫存
-若無 -> 透過 API 獲取
-  API 獲取為 records -> 做迭代處理 -> 取得 [locations]
-  將 locations 存進 local storage
-*/
-
+/// Service class for managing locations.
+/// It provides methods to retrieve locations either from local storage or through an API.
 class LocationService {
+  /// Retrieves a list of locations.
+  ///
+  /// The process includes:
+  /// - Checking local storage for cached locations.
+  /// - If not found in local storage, fetching from the API.
+  /// - Iteratively processing the records to extract locations.
+  /// - Storing the locations in local storage.
+  /// - Updating the loading state.
+  ///
+  /// Returns a Future that completes with a list of locations.
   static Future<List<String>> getLocations() async {
     final GlobalController globalController = Get.find();
 
-    // 從本地獲取
+    // Retrieve locations from local storage
     List<String>? locations = await LocationsDao.getLocations();
 
     if (locations != null) {
       return locations;
 
-      // 本地找不到，從 API 獲取
+      // If not found locally, fetch from the API
     } else {
       List<WeatherRecord> records = await WeatherRecordDao.getWeatherRecords(
           globalController.selectedLocation.value);
 
-      // 取出 locations
+      // Extract locations from the records
       locations = records
           .map<String>((record) => record.locationName)
           .toSet()
-          .toList(); // 迭代遍歷 records，取出 locationNames，用 toSet 移除重複值，再轉成 list
+          .toList(); // Iterate through records, extract location names, remove duplicates with toSet, and convert to a list
 
-      // 交由 dao -> writeLocationsToLocalStorage() 處理
-      LocationsDao.postLocations(locations); // 這裡可以寫得更好，甚至做個 error catch 的動作
+      // Delegate to DAO to write locations to local storage
+      LocationsDao.postLocations(
+          locations); // This could be improved with error handling
 
-      // 更改 state:isLoading
+      // Update the loading state
       globalController.isLoading.value = false;
 
       return locations;
