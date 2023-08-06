@@ -38,7 +38,7 @@ class LocationPage extends StatelessWidget {
                     // 在這裡處理用戶點擊方塊的事件
                     print('User tapped on location: ${locations[index]}');
                     globalController.selectedLocation.value = locations[index];
-                    Get.to(() => const WeatherPage());
+                    Get.to(() => WeatherPage());
                   },
                   child: Card(
                     child: Center(
