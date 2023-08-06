@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "381219327086",
+    "project_id": "ili-ximmingbase-weather-app",
+    "storage_bucket": "ili-ximmingbase-weather-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381219327086:android:4fe85fecdba7692afa2a7f",
+        "android_client_info": {
+          "package_name": "com.example.ximming_base_practice_whether_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381219327086-vlqcsgr35am4a94ol4e3m7ieckl00i3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj2Gc4ApQhIesZmCBKZMavifQUdblW5MA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381219327086-vlqcsgr35am4a94ol4e3m7ieckl00i3q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "381219327086-5hjk63sd83hodgah8kt6lqmnqt0u27em.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tw.arfiligol.ximmingBasePracticeWhetherApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

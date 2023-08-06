@@ -40,6 +40,15 @@ dependencies:
   flutter_dotenv: ^5.1.0
   shared_preferences: ^2.2.0
 
+  # 用於多語系
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+  # Firebase
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -56,6 +65,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  # Allow generating localizations code
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

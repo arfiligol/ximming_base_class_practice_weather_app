@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -24,20 +23,20 @@ class WeatherRecordDao {
     if (dotenv.env['Authorization_key'] != null) {
       String authorizationKey = dotenv.env['Authorization_key'].toString();
 
-      var url;
+      Uri url;
 
       // 檢查是否有 selectedLocation，生成 url
       if (selectedLocation != "") {
         url = Uri.parse(
             "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=$authorizationKey&locationName=$selectedLocation");
-        print(url); // 檢查中文有沒有好好被解析
+        // print(url); // 檢查中文有沒有好好被解析
       } else {
         url = Uri.parse(
             "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=$authorizationKey");
       }
 
       // request
-      print(url);
+      // print(url);
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -51,8 +50,9 @@ class WeatherRecordDao {
         // 回傳 weather records
         return weatherRecords;
       } else {
-        print(response.statusCode);
-        print(response.body);
+        // 不應該有誤 -> 有誤應該顯示在 Screen 中 -> 但就先回傳空陣列
+        // print(response.statusCode);
+        // print(response.body);
         return <WeatherRecord>[]; // 先回傳空陣列
       }
     } else {

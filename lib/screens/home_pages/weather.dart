@@ -4,6 +4,8 @@ import 'package:ximming_base_practice_whether_app/components/weather_card.dart';
 import 'package:ximming_base_practice_whether_app/controllers/global.dart';
 
 class WeatherPage extends StatelessWidget {
+  const WeatherPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final GlobalController globalController = Get.find();

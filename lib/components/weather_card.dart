@@ -19,6 +19,8 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalController globalController = Get.find();
 
+    print("Before FutureBuilder");
+
     return FutureBuilder(
         future: WeatherRecordService.getWeatherRecords(
             globalController.selectedLocation.value),
@@ -27,12 +29,14 @@ class WeatherCard extends StatelessWidget {
           WeatherRecord record;
 
           // 確認與遠端系統交互的連線狀態
-          print(asyncSnapshot.connectionState);
+          // print(asyncSnapshot.connectionState);
           // 確認是否已取得資料
-          print(asyncSnapshot.hasData);
+          // print(asyncSnapshot.hasData);
 
           // 如果連線狀態為已完成，則取用數據，並轉換成Text
           if (asyncSnapshot.connectionState == ConnectionState.done) {
+            print(asyncSnapshot.connectionState);
+
             // 檢查有無錯誤
             if (asyncSnapshot.hasError) {
               return Text("Error: ${asyncSnapshot.error}");
@@ -104,7 +108,7 @@ class WeatherCard extends StatelessWidget {
                                     style: const TextStyle(color: Colors.blue),
                                   ),
                                   TextSpan(
-                                    text: '${parameter.parameterUnit ?? ''}',
+                                    text: parameter.parameterUnit ?? '',
                                     style: const TextStyle(color: Colors.red),
                                   ),
                                 ],

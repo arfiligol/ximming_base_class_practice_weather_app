@@ -12,13 +12,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalController globalController = Get.find();
 
-    List<String> locations = globalController.locations;
-    // 生成 Cards
-
     return Obx(() {
       return (globalController.selectedLocation.value == "")
           ? LocationPage()
-          : WeatherPage();
+          : const WeatherPage();
     });
   }
 }

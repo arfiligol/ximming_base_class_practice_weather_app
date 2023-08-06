@@ -4,6 +4,8 @@ import '../../controllers/global.dart';
 import './weather.dart';
 
 class LocationPage extends StatelessWidget {
+  LocationPage({super.key});
+
   final GlobalController globalController = Get.find();
 
   @override
@@ -24,9 +26,8 @@ class LocationPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     // 在這裡處理用戶點擊方塊的事件
-                    print('User tapped on location: ${locations[index]}');
                     globalController.selectedLocation.value = locations[index];
-                    Get.to(WeatherPage());
+                    Get.to(() => const WeatherPage());
                   },
                   child: Card(
                     child: Center(

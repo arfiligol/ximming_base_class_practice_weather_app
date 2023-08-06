@@ -10,7 +10,6 @@ class WeatherRecord {
   });
 
   factory WeatherRecord.fromJson(Map<String, dynamic> json) {
-    print(json);
     return WeatherRecord(
         locationName: json['locationName'],
         weatherElement: json['weatherElement'] // a list of "weatherElement"
